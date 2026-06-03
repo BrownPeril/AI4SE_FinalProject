@@ -1,0 +1,124 @@
+<h2>设计第3节：API 设计</h2>
+<p class="subtitle">RESTful JSON 接口 — 前后端通信契约</p>
+
+<div class="mockup">
+  <div class="mockup-header">API 端点总览</div>
+  <div class="mockup-body" style="padding: 16px; font-size: 13px;">
+
+    <!-- MilkTeaRecord APIs -->
+    <div style="margin-bottom: 16px;">
+      <div style="background: #FF8F00; color: white; padding: 8px 14px; border-radius: 8px 8px 0 0; font-weight: bold;">
+        🧋 /api/milk-tea-records — 饮品档案接口
+      </div>
+      <div style="border: 1px solid #FFB74D; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+          <tr style="background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32; width: 60px;">GET</td>
+            <td style="padding: 8px 12px; width: 280px;">/api/milk-tea-records</td>
+            <td style="padding: 8px 12px; color: #666;">获取饮品列表（分页+筛选）</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #1565C0;">POST</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records</td>
+            <td style="padding: 8px 12px; color: #666;">新建饮品档案</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2; background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">获取单个饮品详情</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #F57F17;">PUT</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">更新饮品档案</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2; background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #C62828;">DELETE</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">删除饮品档案</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ConsumeRecord APIs -->
+    <div style="margin-bottom: 16px;">
+      <div style="background: #2E7D32; color: white; padding: 8px 14px; border-radius: 8px 8px 0 0; font-weight: bold;">
+        💰 /api/consume-records — 消费记录接口
+      </div>
+      <div style="border: 1px solid #81C784; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+          <tr style="background: #E8F5E9;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32; width: 60px;">GET</td>
+            <td style="padding: 8px 12px; width: 280px;">/api/consume-records</td>
+            <td style="padding: 8px 12px; color: #666;">获取消费列表（分页+筛选）</td>
+          </tr>
+          <tr style="border-top: 1px solid #C8E6C9;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #1565C0;">POST</td>
+            <td style="padding: 8px 12px;">/api/consume-records</td>
+            <td style="padding: 8px 12px; color: #666;">新建消费记录</td>
+          </tr>
+          <tr style="border-top: 1px solid #C8E6C9; background: #E8F5E9;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/consume-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">获取单条消费详情</td>
+          </tr>
+          <tr style="border-top: 1px solid #C8E6C9;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #F57F17;">PUT</td>
+            <td style="padding: 8px 12px;">/api/consume-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">更新消费记录</td>
+          </tr>
+          <tr style="border-top: 1px solid #C8E6C9; background: #E8F5E9;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #C62828;">DELETE</td>
+            <td style="padding: 8px 12px;">/api/consume-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">删除消费记录</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stats APIs -->
+    <div style="margin-bottom: 16px;">
+      <div style="background: #546E7A; color: white; padding: 8px 14px; border-radius: 8px 8px 0 0; font-weight: bold;">
+        📊 /api/stats — 统计接口
+      </div>
+      <div style="border: 1px solid #90A4AE; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+          <tr style="background: #ECEFF1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32; width: 60px;">GET</td>
+            <td style="padding: 8px 12px; width: 280px;">/api/stats/overview</td>
+            <td style="padding: 8px 12px; color: #666;">总览：总消费/总杯数/均价/最常喝品牌</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/daily-trend</td>
+            <td style="padding: 8px 12px; color: #666;">每日消费趋势（近30天）</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC; background: #ECEFF1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/brand-distribution</td>
+            <td style="padding: 8px 12px; color: #666;">品牌消费分布（饼图）</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/weekly-summary</td>
+            <td style="padding: 8px 12px; color: #666;">每周消费汇总（柱状图）</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 12px;">
+  <h3>通用约定</h3>
+  <div style="background: #FFF8E1; border-radius: 8px; padding: 14px; font-size: 13px; line-height: 1.8;">
+    <ul style="margin: 0; padding-left: 20px;">
+      <li><strong>分页参数</strong>：<code>?page=0&size=10</code>，返回 <code>{ content: [], totalElements, totalPages, number, size }</code></li>
+      <li><strong>筛选参数</strong>：<code>?brand=喜茶&minPrice=10&maxPrice=30&sugarLevel=半糖</code></li>
+      <li><strong>统一响应格式</strong>：<code>{ code: 200, message: "success", data: {...} }</code></li>
+      <li><strong>错误响应</strong>：<code>{ code: 404, message: "记录不存在", data: null }</code></li>
+      <li><strong>日期格式</strong>：<code>yyyy-MM-dd HH:mm:ss</code></li>
+    </ul>
+  </div>
+</div>

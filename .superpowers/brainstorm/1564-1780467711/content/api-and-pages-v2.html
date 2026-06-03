@@ -1,0 +1,180 @@
+<h2>设计第3节（修订）：API + 页面 — 简化版</h2>
+<p class="subtitle">单表带来的全面精简</p>
+
+<div class="mockup">
+  <div class="mockup-header">API 端点（5+4 = 9个）</div>
+  <div class="mockup-body" style="padding: 16px; font-size: 13px;">
+
+    <!-- CRUD APIs -->
+    <div style="margin-bottom: 16px;">
+      <div style="background: #FF8F00; color: white; padding: 8px 14px; border-radius: 8px 8px 0 0; font-weight: bold;">
+        🧋 /api/milk-tea-records — CRUD
+      </div>
+      <div style="border: 1px solid #FFB74D; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+          <tr style="background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32; width: 60px;">GET</td>
+            <td style="padding: 8px 12px; width: 300px;">/api/milk-tea-records</td>
+            <td style="padding: 8px 12px; color: #666;">列表（分页+筛选）</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #1565C0;">POST</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records</td>
+            <td style="padding: 8px 12px; color: #666;">新建记录</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2; background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">获取详情</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #F57F17;">PUT</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">更新记录</td>
+          </tr>
+          <tr style="border-top: 1px solid #FFE0B2; background: #FFF8E1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #C62828;">DELETE</td>
+            <td style="padding: 8px 12px;">/api/milk-tea-records/{id}</td>
+            <td style="padding: 8px 12px; color: #666;">删除记录</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stats APIs (unchanged) -->
+    <div style="margin-bottom: 16px;">
+      <div style="background: #546E7A; color: white; padding: 8px 14px; border-radius: 8px 8px 0 0; font-weight: bold;">
+        📊 /api/stats — 统计（从 MilkTeaRecord 聚合）
+      </div>
+      <div style="border: 1px solid #90A4AE; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-family: monospace;">
+          <tr style="background: #ECEFF1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32; width: 60px;">GET</td>
+            <td style="padding: 8px 12px; width: 300px;">/api/stats/overview</td>
+            <td style="padding: 8px 12px; color: #666;">总览：总消费/总杯数/均价/最常喝品牌</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/daily-trend</td>
+            <td style="padding: 8px 12px; color: #666;">每日消费趋势（近30天）</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC; background: #ECEFF1;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/brand-distribution</td>
+            <td style="padding: 8px 12px; color: #666;">品牌消费分布（饼图）</td>
+          </tr>
+          <tr style="border-top: 1px solid #CFD8DC;">
+            <td style="padding: 8px 12px; font-weight: bold; color: #2E7D32;">GET</td>
+            <td style="padding: 8px 12px;">/api/stats/weekly-summary</td>
+            <td style="padding: 8px 12px; color: #666;">每周消费汇总（柱状图）</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mockup" style="margin-top: 16px;">
+  <div class="mockup-header">3 个页面（精简后）</div>
+  <div class="mockup-body" style="padding: 16px;">
+
+    <!-- Page 1 -->
+    <div style="border: 1px solid #FFB74D; border-radius: 10px; overflow: hidden; margin-bottom: 12px;">
+      <div style="background: #FFF3E0; padding: 8px 14px; font-weight: bold; color: #E65100;">
+        🧋 页面1：奶茶记录列表 <span style="font-weight: normal; font-size: 12px;">/records</span>
+      </div>
+      <div style="padding: 14px; background: white; display: flex; gap: 12px; font-size: 12px;">
+        <div style="border: 1px solid #EEE; border-radius: 8px; padding: 10px; width: 180px;">
+          <div style="font-weight: bold; margin-bottom: 6px;">🔍 筛选</div>
+          <div style="color: #888; margin-bottom: 4px;">品牌: [下拉]</div>
+          <div style="color: #888; margin-bottom: 4px;">糖度: [下拉]</div>
+          <div style="color: #888; margin-bottom: 4px;">价格区间: [min~max]</div>
+          <div style="color: #888;">关键词: [搜索]</div>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold;">共 42 条记录</span>
+            <div style="background: #FF8F00; color: white; padding: 4px 14px; border-radius: 6px; font-size: 12px;">+ 记一杯奶茶</div>
+          </div>
+          <div style="border: 1px solid #EEE; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div><strong>喜茶 · 多肉葡萄</strong><br/><span style="color: #888;">绿茶底 · 半糖 · 少冰 · 大杯 · ¥25</span></div>
+            <div style="text-align: center;"><span style="color: #FF8F00;">★★★★☆</span><br/><span style="color: #888; font-size: 11px;">06-01 14:30</span></div>
+            <div style="display: flex; gap: 6px;"><span style="color: #1565C0; font-size: 11px;">编辑</span><span style="color: #C62828; font-size: 11px;">删除</span></div>
+          </div>
+          <div style="border: 1px solid #EEE; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div><strong>茶百道 · 豆乳玉麒麟</strong><br/><span style="color: #888;">乌龙茶底 · 微糖 · 去冰 · 中杯 · ¥18</span></div>
+            <div style="text-align: center;"><span style="color: #FF8F00;">★★★☆☆</span><br/><span style="color: #888; font-size: 11px;">05-30 10:15</span></div>
+            <div style="display: flex; gap: 6px;"><span style="color: #1565C0; font-size: 11px;">编辑</span><span style="color: #C62828; font-size: 11px;">删除</span></div>
+          </div>
+          <div style="text-align: center; color: #888; font-size: 11px;">← 1 2 3 →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div style="border: 1px solid #FFB74D; border-radius: 10px; overflow: hidden; margin-bottom: 12px;">
+      <div style="background: #FFF3E0; padding: 8px 14px; font-weight: bold; color: #E65100;">
+        🧋 页面2：记录表单 <span style="font-weight: normal; font-size: 12px;">/records/new 和 /records/:id/edit</span>
+      </div>
+      <div style="padding: 14px; background: white; font-size: 12px; display: flex; gap: 16px;">
+        <div style="flex: 1;">
+          <div style="font-weight: bold; margin-bottom: 8px; color: #795548;">基本信息</div>
+          <div style="margin-bottom: 6px;">品牌: [________________]</div>
+          <div style="margin-bottom: 6px;">饮品名: [________________]</div>
+          <div style="margin-bottom: 6px;">价格: [____] 元</div>
+          <div>消费时间: [日期时间选择器]</div>
+        </div>
+        <div style="flex: 1;">
+          <div style="font-weight: bold; margin-bottom: 8px; color: #795548;">饮品详情</div>
+          <div style="margin-bottom: 6px;">糖度: [下拉 ▼]  冰度: [下拉 ▼]</div>
+          <div style="margin-bottom: 6px;">杯型: [下拉 ▼]  茶底: [______]</div>
+        </div>
+        <div style="flex: 1;">
+          <div style="font-weight: bold; margin-bottom: 8px; color: #795548;">主观评价</div>
+          <div style="margin-bottom: 6px;">评分: ★★★★☆</div>
+          <div style="margin-bottom: 6px;">点评: [________________]</div>
+          <div>推荐: ○ 是  ○ 否</div>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;">
+          <div style="background: #FF8F00; color: white; padding: 6px 16px; border-radius: 6px; text-align: center;">保存</div>
+          <div style="background: #EEE; padding: 6px 16px; border-radius: 6px; text-align: center; color: #666;">取消</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3 -->
+    <div style="border: 1px solid #90A4AE; border-radius: 10px; overflow: hidden;">
+      <div style="background: #ECEFF1; padding: 8px 14px; font-weight: bold; color: #37474F;">
+        📊 页面3：消费统计 <span style="font-weight: normal; font-size: 12px;">/statistics</span>
+      </div>
+      <div style="padding: 14px; background: white; font-size: 12px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; border: 1px solid #EEE; border-radius: 8px; padding: 10px; text-align: center;">
+            <div style="color: #888; font-size: 11px;">总消费</div>
+            <div style="font-size: 22px; font-weight: bold; color: #FF8F00;">¥1,280</div>
+          </div>
+          <div style="flex: 1; border: 1px solid #EEE; border-radius: 8px; padding: 10px; text-align: center;">
+            <div style="color: #888; font-size: 11px;">总杯数</div>
+            <div style="font-size: 22px; font-weight: bold; color: #2E7D32;">42</div>
+          </div>
+          <div style="flex: 1; border: 1px solid #EEE; border-radius: 8px; padding: 10px; text-align: center;">
+            <div style="color: #888; font-size: 11px;">均价</div>
+            <div style="font-size: 22px; font-weight: bold; color: #546E7A;">¥30.5</div>
+          </div>
+          <div style="flex: 1; border: 1px solid #EEE; border-radius: 8px; padding: 10px; text-align: center;">
+            <div style="color: #888; font-size: 11px;">最常喝</div>
+            <div style="font-size: 22px; font-weight: bold; color: #7B1FA2;">喜茶</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <div style="flex: 2; border: 1px solid #EEE; border-radius: 8px; padding: 10px; height: 140px; display: flex; align-items: center; justify-content: center; color: #888;">
+            📈 每日消费趋势（近30天折线图）
+          </div>
+          <div style="flex: 1; border: 1px solid #EEE; border-radius: 8px; padding: 10px; height: 140px; display: flex; align-items: center; justify-content: center; color: #888;">
+            🥧 品牌分布（饼图）
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<h2>设计第2节（终版）：数据模型 — 单表</h2>
+<p class="subtitle">MilkTeaRecord 合并消费信息，删去 ConsumeRecord</p>
+
+<div class="mockup">
+  <div class="mockup-header">实体设计</div>
+  <div class="mockup-body" style="padding: 20px;">
+    <div style="border: 2px solid #FF8F00; border-radius: 12px; overflow: hidden; max-width: 520px; margin: 0 auto;">
+      <div style="background: #FF8F00; color: white; padding: 10px 16px; font-weight: bold; font-size: 16px;">
+        🧋 MilkTeaRecord <span style="font-weight: normal; font-size: 12px;">（唯一实体）</span>
+      </div>
+      <div style="padding: 12px 16px; background: #FFF8E1; font-family: monospace; font-size: 13px; line-height: 1.8;">
+        <div style="display: flex; justify-content: space-between;">
+          <span><span style="color: #E65100; font-weight: bold;">🔑 id</span></span>
+          <span style="color: #888;">Long (自增主键)</span>
+        </div>
+        <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+
+        <div style="color: #795548; font-weight: bold; margin-top: 4px;">── 基本信息 ──</div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>brand</span><span style="color: #888;">String (品牌)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>drinkName</span><span style="color: #888;">String (饮品名)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>price</span><span style="color: #888;">BigDecimal (价格)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>consumeDate</span><span style="color: #888;">LocalDateTime (消费时间)</span>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+        <div style="color: #795548; font-weight: bold;">── 饮品详情 ──</div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>sugarLevel</span><span style="color: #888;">String (糖度)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>iceLevel</span><span style="color: #888;">String (冰度)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>cupSize</span><span style="color: #888;">String (杯型)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>teaBase</span><span style="color: #888;">String (茶底)</span>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+        <div style="color: #795548; font-weight: bold;">── 主观评价 ──</div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>rating</span><span style="color: #888;">Integer (1-5星)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>comment</span><span style="color: #888;">String (点评)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>wouldRecommend</span><span style="color: #888;">Boolean</span>
+        </div>
+
+        <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+        <div style="display: flex; justify-content: space-between;">
+          <span>createdAt</span><span style="color: #888;">LocalDateTime</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>updatedAt</span><span style="color: #888;">LocalDateTime</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #E8F5E9; border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 13px; line-height: 1.8;">
+      <strong>✅ 简化效果：</strong>
+      <ul style="margin: 4px 0 0 0; padding-left: 20px;">
+        <li>1张表替代2张表 — 无外键、无关联查询、无 JOIN</li>
+        <li>price + consumeDate 从 ConsumeRecord 并入 — 一次记录就是一次消费</li>
+        <li>删除 paymentMethod — 不再需要</li>
+        <li>API 从 10 个 CRUD 端点缩减为 5 个 — 只需 /api/milk-tea-records</li>
+        <li>前端页面从 4 页缩减为 3 页 — 消费记录页面由统计页面替代</li>
+      </ul>
+    </div>
+  </div>
+</div>

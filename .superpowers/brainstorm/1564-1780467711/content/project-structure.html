@@ -1,0 +1,97 @@
+<h2>设计第5节：项目目录结构</h2>
+<p class="subtitle">前后端分离 Monorepo 布局</p>
+
+<div class="mockup">
+  <div class="mockup-header">目录树</div>
+  <div class="mockup-body" style="padding: 16px; font-family: monospace; font-size: 13px; line-height: 1.7;">
+    <div style="display: flex; gap: 30px;">
+      <!-- Backend -->
+      <div style="flex: 1;">
+        <div style="background: #2E7D32; color: white; padding: 6px 12px; border-radius: 6px 6px 0 0; font-weight: bold;">
+          ☕ backend/ (SpringBoot)
+        </div>
+        <div style="border: 1px solid #81C784; border-top: none; border-radius: 0 0 6px 6px; padding: 10px 12px; background: #F1F8E9;">
+          <div>├── src/main/java/com/milktea/</div>
+          <div>│   ├── <span style="color: #2E7D32; font-weight: bold;">MilkTeaApplication.java</span></div>
+          <div>│   ├── controller/</div>
+          <div>│   │   ├── MilkTeaRecordController.java</div>
+          <div>│   │   └── StatsController.java</div>
+          <div>│   ├── service/</div>
+          <div>│   │   ├── MilkTeaRecordService.java</div>
+          <div>│   │   └── StatsService.java</div>
+          <div>│   ├── repository/</div>
+          <div>│   │   └── MilkTeaRecordRepository.java</div>
+          <div>│   ├── model/</div>
+          <div>│   │   ├── MilkTeaRecord.java</div>
+          <div>│   │   └── enums/</div>
+          <div>│   │       ├── SugarLevel.java</div>
+          <div>│   │       ├── IceLevel.java</div>
+          <div>│   │       └── CupSize.java</div>
+          <div>│   ├── dto/</div>
+          <div>│   │   ├── MilkTeaRecordRequest.java</div>
+          <div>│   │   ├── MilkTeaRecordResponse.java</div>
+          <div>│   │   ├── StatsOverviewResponse.java</div>
+          <div>│   │   └── ApiResponse.java</div>
+          <div>│   └── config/</div>
+          <div>│       ├── CorsConfig.java</div>
+          <div>│       └── WebConfig.java</div>
+          <div>├── src/main/resources/</div>
+          <div>│   ├── application.yml</div>
+          <div>│   └── data.sql <span style="color: #888;">(初始样例数据)</span></div>
+          <div>├── src/test/java/com/milktea/</div>
+          <div>│   ├── controller/</div>
+          <div>│   ├── service/</div>
+          <div>│   └── repository/</div>
+          <div>├── Dockerfile</div>
+          <div>└── pom.xml</div>
+        </div>
+      </div>
+
+      <!-- Frontend -->
+      <div style="flex: 1;">
+        <div style="background: #FF8F00; color: white; padding: 6px 12px; border-radius: 6px 6px 0 0; font-weight: bold;">
+          🧋 frontend/ (Vue3 + Vite)
+        </div>
+        <div style="border: 1px solid #FFB74D; border-top: none; border-radius: 0 0 6px 6px; padding: 10px 12px; background: #FFF8E1;">
+          <div>├── src/</div>
+          <div>│   ├── <span style="color: #E65100; font-weight: bold;">App.vue</span></div>
+          <div>│   ├── main.js</div>
+          <div>│   ├── router/</div>
+          <div>│   │   └── index.js</div>
+          <div>│   ├── stores/</div>
+          <div>│   │   └── milkTea.js <span style="color: #888;">(Pinia)</span></div>
+          <div>│   ├── views/</div>
+          <div>│   │   ├── RecordListView.vue</div>
+          <div>│   │   ├── RecordFormView.vue</div>
+          <div>│   │   └── StatisticsView.vue</div>
+          <div>│   ├── components/</div>
+          <div>│   │   ├── RecordCard.vue</div>
+          <div>│   │   ├── FilterBar.vue</div>
+          <div>│   │   ├── RecordForm.vue</div>
+          <div>│   │   ├── OverviewCards.vue</div>
+          <div>│   │   └── ChartPanel.vue</div>
+          <div>│   ├── api/</div>
+          <div>│   │   └── milkTea.js <span style="color: #888;">(axios封装)</span></div>
+          <div>│   └── assets/</div>
+          <div>│       └── styles/</div>
+          <div>│           └── theme.js <span style="color: #888;">(NaiveUI主题)</span></div>
+          <div>├── index.html</div>
+          <div>├── vite.config.js</div>
+          <div>├── Dockerfile</div>
+          <div>└── nginx.conf <span style="color: #888;">(生产代理)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Root -->
+    <div style="margin-top: 16px; background: #ECEFF1; border-radius: 8px; padding: 10px 12px;">
+      <div>📁 项目根目录</div>
+      <div style="padding-left: 16px;">
+        <div>├── docker-compose.yml</div>
+        <div>├── .github/workflows/ci.yml</div>
+        <div>├── SPEC.md / PLAN.md / AGENT_LOG.md</div>
+        <div>└── README.md</div>
+      </div>
+    </div>
+  </div>
+</div>

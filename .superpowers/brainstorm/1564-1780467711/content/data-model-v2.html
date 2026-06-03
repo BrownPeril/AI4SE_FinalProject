@@ -1,0 +1,141 @@
+<h2>设计第2节（修订）：数据模型</h2>
+<p class="subtitle">双表设计 — MilkTeaRecord + ConsumeRecord</p>
+
+<div class="mockup">
+  <div class="mockup-header">实体关系图</div>
+  <div class="mockup-body" style="padding: 20px;">
+    <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+
+      <!-- MilkTeaRecord -->
+      <div style="border: 2px solid #FF8F00; border-radius: 12px; overflow: hidden; min-width: 300px;">
+        <div style="background: #FF8F00; color: white; padding: 10px 16px; font-weight: bold; font-size: 15px;">
+          🧋 MilkTeaRecord <span style="font-weight: normal; font-size: 12px;">（饮品档案）</span>
+        </div>
+        <div style="padding: 12px 16px; background: #FFF8E1; font-family: monospace; font-size: 13px; line-height: 1.8;">
+          <div style="display: flex; justify-content: space-between;">
+            <span><span style="color: #E65100; font-weight: bold;">🔑 id</span></span>
+            <span style="color: #888;">Long (自增)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+          <div style="color: #795548; font-weight: bold;">── 基本信息 ──</div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>brand</span><span style="color: #888;">String (品牌)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>drinkName</span><span style="color: #888;">String (饮品名)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+          <div style="color: #795548; font-weight: bold;">── 饮品详情 ──</div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>sugarLevel</span><span style="color: #888;">String (糖度)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>iceLevel</span><span style="color: #888;">String (冰度)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>cupSize</span><span style="color: #888;">String (杯型)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>teaBase</span><span style="color: #888;">String (茶底)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+          <div style="color: #795548; font-weight: bold;">── 主观评价 ──</div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>rating</span><span style="color: #888;">Integer (1-5星)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>comment</span><span style="color: #888;">String (点评)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>wouldRecommend</span><span style="color: #888;">Boolean</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #FFB74D; margin: 6px 0;"/>
+          <div style="display: flex; justify-content: space-between;">
+            <span>createdAt</span><span style="color: #888;">LocalDateTime</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>updatedAt</span><span style="color: #888;">LocalDateTime</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relationship Arrow -->
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 80px;">
+        <div style="color: #546E7A; font-weight: bold; font-size: 12px;">1</div>
+        <div style="font-size: 24px; color: #78909C;">──────</div>
+        <div style="color: #546E7A; font-size: 11px; margin: 2px 0;">consumeRecords</div>
+        <div style="font-size: 24px; color: #78909C;">──────</div>
+        <div style="color: #546E7A; font-weight: bold; font-size: 12px;">N</div>
+      </div>
+
+      <!-- ConsumeRecord -->
+      <div style="border: 2px solid #2E7D32; border-radius: 12px; overflow: hidden; min-width: 300px;">
+        <div style="background: #2E7D32; color: white; padding: 10px 16px; font-weight: bold; font-size: 15px;">
+          💰 ConsumeRecord <span style="font-weight: normal; font-size: 12px;">（消费记录）</span>
+        </div>
+        <div style="padding: 12px 16px; background: #E8F5E9; font-family: monospace; font-size: 13px; line-height: 1.8;">
+          <div style="display: flex; justify-content: space-between;">
+            <span><span style="color: #1B5E20; font-weight: bold;">🔑 id</span></span>
+            <span style="color: #888;">Long (自增)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #81C784; margin: 6px 0;"/>
+          <div style="color: #33691E; font-weight: bold;">── 关联 ──</div>
+          <div style="display: flex; justify-content: space-between;">
+            <span><span style="color: #1B5E20;">🔗 milkTeaRecord_id</span></span>
+            <span style="color: #888;">Long (FK)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #81C784; margin: 6px 0;"/>
+          <div style="color: #33691E; font-weight: bold;">── 消费信息 ──</div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>price</span><span style="color: #888;">BigDecimal (价格)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>consumeDate</span><span style="color: #888;">LocalDateTime</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>paymentMethod</span><span style="color: #888;">String (支付方式)</span>
+          </div>
+          <hr style="border: none; border-top: 1px dashed #81C784; margin: 6px 0;"/>
+          <div style="display: flex; justify-content: space-between;">
+            <span>createdAt</span><span style="color: #888;">LocalDateTime</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span>updatedAt</span><span style="color: #888;">LocalDateTime</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Notes -->
+    <div style="background: #FFF3E0; border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 13px; line-height: 1.8;">
+      <strong>💡 设计思路：</strong>
+      <ul style="margin: 4px 0 0 0; padding-left: 20px;">
+        <li><strong>MilkTeaRecord 是饮品档案</strong> — 记录"这个奶茶怎么样"（口味、评价）</li>
+        <li><strong>ConsumeRecord 是消费事件</strong> — 记录"这次花了多少钱、什么时候买的"</li>
+        <li><strong>1:N 关系</strong> — 同一款饮品可以多次购买，每次消费生成一条 ConsumeRecord</li>
+        <li>例：喜茶多肉葡萄 → 3次消费（周一25元、周三28元加料、周五25元）</li>
+        <li>消费统计直接查 ConsumeRecord 即可：日均/周均消费、品牌消费排行等</li>
+      </ul>
+    </div>
+
+    <!-- Enum Definitions -->
+    <div style="display: flex; gap: 12px; margin-top: 12px; justify-content: center; flex-wrap: wrap;">
+      <div style="border: 1px solid #FFB74D; border-radius: 8px; padding: 10px; background: white; min-width: 140px;">
+        <div style="font-weight: bold; color: #E65100; font-size: 13px;">SugarLevel</div>
+        <div style="font-size: 12px; color: #666; margin-top: 4px;">无糖 / 微糖 / 半糖 / 少糖 / 全糖</div>
+      </div>
+      <div style="border: 1px solid #FFB74D; border-radius: 8px; padding: 10px; background: white; min-width: 140px;">
+        <div style="font-weight: bold; color: #E65100; font-size: 13px;">IceLevel</div>
+        <div style="font-size: 12px; color: #666; margin-top: 4px;">去冰 / 少冰 / 正常冰 / 多冰 / 温 / 热</div>
+      </div>
+      <div style="border: 1px solid #FFB74D; border-radius: 8px; padding: 10px; background: white; min-width: 140px;">
+        <div style="font-weight: bold; color: #E65100; font-size: 13px;">CupSize</div>
+        <div style="font-size: 12px; color: #666; margin-top: 4px;">小杯 / 中杯 / 大杯 / 超大杯</div>
+      </div>
+      <div style="border: 1px solid #81C784; border-radius: 8px; padding: 10px; background: white; min-width: 140px;">
+        <div style="font-weight: bold; color: #2E7D32; font-size: 13px;">PaymentMethod</div>
+        <div style="font-size: 12px; color: #666; margin-top: 4px;">微信 / 支付宝 / 现金 / 其他</div>
+      </div>
+    </div>
+  </div>
+</div>
