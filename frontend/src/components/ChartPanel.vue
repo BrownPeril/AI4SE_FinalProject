@@ -27,13 +27,14 @@ const props = defineProps({
 const cafeColors = ['#9b5b32', '#c9822f', '#4f8a4f', '#7a6d63', '#b33a3a', '#4c4037']
 
 const chartOption = computed(() => {
+  const data = props.data || {}
   if (props.type === 'line') {
     return {
       tooltip: { trigger: 'axis' },
-      xAxis: { type: 'category', data: props.data.dates || [] },
+      xAxis: { type: 'category', data: data.dates || [] },
       yAxis: { type: 'value' },
       series: [{
-        type: 'line', data: props.data.amounts || [],
+        type: 'line', data: data.amounts || [],
         smooth: true, areaStyle: { opacity: 0.15 },
         lineStyle: { color: '#9b5b32', width: 2 },
         itemStyle: { color: '#9b5b32' }
@@ -42,9 +43,9 @@ const chartOption = computed(() => {
     }
   }
   if (props.type === 'pie') {
-    const pieData = (props.data.brands || []).map((brand, i) => ({
+    const pieData = (data.brands || []).map((brand, i) => ({
       name: brand,
-      value: props.data.counts?.[i] || 0
+      value: data.counts?.[i] || 0
     }))
     return {
       tooltip: { trigger: 'item' },
@@ -60,10 +61,10 @@ const chartOption = computed(() => {
   if (props.type === 'bar') {
     return {
       tooltip: { trigger: 'axis' },
-      xAxis: { type: 'category', data: props.data.weeks || [] },
+      xAxis: { type: 'category', data: data.weeks || [] },
       yAxis: { type: 'value' },
       series: [{
-        type: 'bar', data: props.data.amounts || [],
+        type: 'bar', data: data.amounts || [],
         itemStyle: { color: '#9b5b32', borderRadius: [4, 4, 0, 0] }
       }],
       grid: { left: 50, right: 20, top: 20, bottom: 30 }

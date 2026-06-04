@@ -16,9 +16,9 @@ export const useMilkTeaStore = defineStore('milkTea', {
       keyword: null
     },
     overview: null,
-    dailyTrend: null,
-    brandDistribution: null,
-    weeklySummary: null,
+    dailyTrend: { dates: [], amounts: [] },
+    brandDistribution: { brands: [], counts: [], amounts: [] },
+    weeklySummary: { weeks: [], amounts: [], counts: [] },
     loading: false
   }),
 
@@ -72,7 +72,7 @@ export const useMilkTeaStore = defineStore('milkTea', {
     },
 
     async fetchAllStats() {
-      await Promise.all([
+      await Promise.allSettled([
         this.fetchOverview(),
         this.fetchDailyTrend(),
         this.fetchBrandDistribution(),
