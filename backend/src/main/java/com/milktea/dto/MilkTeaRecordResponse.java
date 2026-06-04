@@ -1,5 +1,7 @@
 package com.milktea.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -8,6 +10,7 @@ public class MilkTeaRecordResponse {
     private String brand;
     private String drinkName;
     private BigDecimal price;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime consumeDate;
     private String sugarLevel;
     private String iceLevel;
@@ -16,7 +19,9 @@ public class MilkTeaRecordResponse {
     private Integer rating;
     private String comment;
     private Boolean wouldRecommend;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     public Long getId() { return id; }

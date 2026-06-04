@@ -1,5 +1,6 @@
 package com.milktea.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class MilkTeaRecordRequest {
     private BigDecimal price;
 
     @NotNull(message = "消费时间不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime consumeDate;
 
     private String sugarLevel;
