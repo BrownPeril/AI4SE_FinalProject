@@ -4,12 +4,13 @@ import com.milktea.model.MilkTeaRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 
 @Repository
-public interface MilkTeaRecordRepository extends JpaRepository<MilkTeaRecord, Long> {
+public interface MilkTeaRecordRepository extends JpaRepository<MilkTeaRecord, Long>, JpaSpecificationExecutor<MilkTeaRecord> {
 
     Page<MilkTeaRecord> findByBrand(String brand, Pageable pageable);
 
