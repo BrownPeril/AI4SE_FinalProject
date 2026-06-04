@@ -85,3 +85,54 @@
 - **学到的教训**: 纯 DTO 任务可以跳过 TDD 流程（数据类无逻辑可测），只验证编译即可
 
 ---
+
+## Task 5: MilkTeaRecordService
+
+- **时间戳与 task 编号**: 2026-06-04 Task 5
+- **触发的 Superpowers 技能**: `subagent-driven-development`, `test-driven-development`
+- **关键 prompt / context 配置**: 提供 Service 完整实现代码给 subagent，要求 TDD
+- **subagent 输出的关键片段**: commit `a076e74` — 8个 service 测试全部通过。重要发现：Repository 需要额外继承 `JpaSpecificationExecutor<MilkTeaRecord>` 才能支持 Specification 动态查询
+- **Spec 合规检查**: ✅ 通过
+- **学到的教训**: Spring Data JPA 使用 Specification 做动态查询时，Repository 必须同时继承 `JpaRepository` 和 `JpaSpecificationExecutor`，否则 `findAll(Specification, Pageable)` 方法不存在
+
+---
+
+## Task 6: MilkTeaRecordController + GlobalExceptionHandler
+
+- **时间戳与 task 编号**: 2026-06-04 Task 6
+- **触发的 Superpowers 技能**: `subagent-driven-development`, `test-driven-development`, `systematic-debugging`
+- **关键 prompt / context 配置**: 提供 Controller 完整代码，要求 TDD
+- **subagent 输出的关键片段**: commit `b66ee7f` — Controller + GlobalExceptionHandler
+- **遇到的问题**: Java 24 + Mockito inline mocking 失败（`Byte Buddy does not support Java 24`）
+  - 初始尝试：添加 byte-buddy 依赖 → 失败
+  - 第二次尝试：添加 `--add-opens` JVM 参数 → 失败
+  - **最终解决方案**：1) 在 maven-surefire-plugin 中添加 `-Dnet.bytebuddy.experimental=true`；2) 将 Controller 测试从 `@WebMvcTest` + `@MockBean` 改为 standalone MockMvc（`MockMvcBuilders.standaloneSetup()` + `@ExtendWith(MockitoExtension.class)`）
+  - 提前创建了 GlobalExceptionHandler（原 Task 9 的一部分），因为 standalone MockMvc 测试需要它来处理校验错误
+- **Spec 合规检查**: ✅ 通过
+- **学到的教训**:
+  - Java 24 上 `@WebMvcTest` + `@MockBean` 不可用（Byte Buddy 兼容性问题），用 standalone MockMvc 替代
+  - `-Dnet.bytebuddy.experimental=true` 是让 Mockito 在 Java 24 上工作的必要配置
+  - 可以提前创建 GlobalExceptionHandler 以支持 Controller 层的校验测试
+
+---
+
+## Task 7+8: StatsService + StatsController
+
+- **时间戳与 task 编号**: 2026-06-04 Task 7+8
+- **触发的 Superpowers 技能**: `subagent-driven-development`, `test-driven-development`
+- **关键 prompt / context 配置**: 合并 Task 7 和 8 为一个 subagent 任务（紧密耦合），提供完整代码
+- **subagent 输出的关键片段**: commit `888adaf` — StatsService(5测试) + StatsController(4测试)，全量 33 测试通过
+- **Spec 合规检查**: ✅ 跳过独立审查（代码直接从计划复制，且全量测试通过）
+- **学到的教训**: 紧密耦合的 Service+Controller 可以合并为一个 subagent 任务，减少上下文切换开销
+
+---
+
+## Task 9: CORS Config
+
+- **时间戳与 task 编号**: 2026-06-04 Task 9（GlobalExceptionHandler 已在 Task 6 提前完成）
+- **触发的 Superpowers 技能**: 直接实现（简单的配置类）
+- **关键 prompt / context 配置**: CORS 配置允许 localhost:5173（Vite 开发）和 localhost:80（Docker Nginx 生产）
+- **subagent 输出的关键片段**: commit `7405625` — CorsConfig.java
+- **学到的教训**: 简单的配置类无需 subagent，直接创建更高效
+
+---
