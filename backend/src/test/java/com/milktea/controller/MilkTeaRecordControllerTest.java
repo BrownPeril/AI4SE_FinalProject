@@ -1,18 +1,23 @@
 package com.milktea.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.milktea.dto.MilkTeaRecordRequest;
 import com.milktea.dto.MilkTeaRecordResponse;
 import com.milktea.service.MilkTeaRecordService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,16 +28,17 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(MilkTeaRecordController.class)
+@ExtendWith(MockitoExtension.class)
 class MilkTeaRecordControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     private MilkTeaRecordService service;
 
-    @Autowired
+    @InjectMocks
+    private MilkTeaRecordController controller;
+
     private ObjectMapper objectMapper;
 
     private MilkTeaRecordResponse buildResponse() {
@@ -45,6 +51,18 @@ class MilkTeaRecordControllerTest {
         r.setSugarLevel("半糖");
         r.setRating(4);
         return r;
+    }
+
+    @BeforeEach
+    void setUp() {
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(objectMapper);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setMessageConverters(converter)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
     }
 
     @Test
