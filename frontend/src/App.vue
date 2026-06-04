@@ -17,6 +17,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { cafeThemeOverrides } from './assets/styles/theme.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -36,25 +37,7 @@ function handleMenuSelect(key) {
   if (key === 'statistics') router.push('/statistics')
 }
 
-const themeOverrides = {
-  common: {
-    primaryColor: '#9b5b32',
-    primaryColorHover: '#b06a3d',
-    primaryColorPressed: '#8a502b',
-    primaryColorSuppl: '#9b5b32',
-    bodyColor: '#fbf6ee',
-    cardColor: '#fffdf8',
-    textColorBase: '#201914',
-    textColor1: '#201914',
-    textColor2: '#4c4037',
-    textColor3: '#7a6d63',
-    successColor: '#4f8a4f',
-    warningColor: '#c9822f',
-    errorColor: '#b33a3a',
-    borderRadius: '10px',
-    borderRadiusSmall: '6px'
-  }
-}
+const themeOverrides = cafeThemeOverrides
 </script>
 
 <style>
