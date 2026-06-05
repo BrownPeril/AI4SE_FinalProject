@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - milk-tea-data:/app/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:/app/data/milktea
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  milk-tea-data:
