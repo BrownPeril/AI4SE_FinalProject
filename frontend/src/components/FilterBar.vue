@@ -1,17 +1,61 @@
 <template>
-  <n-card title="🔍 筛选" size="small" style="margin-bottom: 16px;">
-    <n-space vertical>
-      <n-select v-model:value="brand" :options="brandOptions" placeholder="品牌" clearable />
-      <n-select v-model:value="sugarLevel" :options="sugarLevelOptions" placeholder="糖度" clearable />
-      <n-input-group>
-        <n-input-number v-model:value="minPrice" placeholder="最低价" :min="0" clearable style="width: 50%" />
-        <n-input-number v-model:value="maxPrice" placeholder="最高价" :min="0" clearable style="width: 50%" />
-      </n-input-group>
-      <n-input v-model:value="keyword" placeholder="搜索饮品或品牌..." clearable />
-      <n-button type="primary" block @click="applyFilters">筛选</n-button>
-      <n-button block @click="resetFilters">重置</n-button>
-    </n-space>
-  </n-card>
+  <div class="filter-bar">
+    <div class="filter-header">
+      <span class="filter-icon">🔍</span>
+      <span class="filter-title">筛选</span>
+    </div>
+
+    <div class="filter-content">
+      <n-space vertical :size="16">
+        <div class="filter-item">
+          <label class="filter-label">品牌</label>
+          <n-select v-model:value="brand" :options="brandOptions" placeholder="选择品牌" clearable />
+        </div>
+
+        <div class="filter-item">
+          <label class="filter-label">糖度</label>
+          <n-select v-model:value="sugarLevel" :options="sugarLevelOptions" placeholder="选择糖度" clearable />
+        </div>
+
+        <div class="filter-item">
+          <label class="filter-label">价格范围</label>
+          <div class="price-range">
+            <n-input-number
+              v-model:value="minPrice"
+              placeholder="最低"
+              :min="0"
+              clearable
+              class="price-input"
+            />
+            <span class="price-separator">—</span>
+            <n-input-number
+              v-model:value="maxPrice"
+              placeholder="最高"
+              :min="0"
+              clearable
+              class="price-input"
+            />
+          </div>
+        </div>
+
+        <div class="filter-item">
+          <label class="filter-label">搜索</label>
+          <n-input v-model:value="keyword" placeholder="饮品或品牌..." clearable />
+        </div>
+
+        <n-divider style="margin: 8px 0;" />
+
+        <div class="filter-actions">
+          <n-button type="primary" block @click="applyFilters" class="filter-apply-btn">
+            应用筛选
+          </n-button>
+          <n-button text block @click="resetFilters" class="filter-reset-btn">
+            重置
+          </n-button>
+        </div>
+      </n-space>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -61,3 +105,92 @@ function resetFilters() {
   emit('filter', {})
 }
 </script>
+
+<style scoped>
+.filter-bar {
+  background: var(--cafe-surface);
+  border-radius: var(--cafe-radius);
+  border: 1px solid var(--cafe-border-soft);
+  overflow: hidden;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--cafe-surface-warm) 0%, var(--cafe-bg) 100%);
+  border-bottom: 1px solid var(--cafe-border-soft);
+}
+
+.filter-icon {
+  font-size: 18px;
+}
+
+.filter-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cafe-fg);
+  letter-spacing: 1px;
+}
+
+.filter-content {
+  padding: 20px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cafe-fg2);
+}
+
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-input {
+  flex: 1;
+}
+
+.price-separator {
+  color: var(--cafe-muted);
+  font-size: 14px;
+}
+
+.filter-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-apply-btn {
+  border-radius: 8px;
+  font-weight: 600;
+  height: 40px;
+  transition: transform var(--cafe-transition), box-shadow var(--cafe-transition);
+}
+
+.filter-apply-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--cafe-shadow-sm);
+}
+
+.filter-reset-btn {
+  color: var(--cafe-muted);
+  border-radius: 8px;
+  height: 36px;
+}
+
+.filter-reset-btn:hover {
+  color: var(--cafe-fg2);
+}
+</style>

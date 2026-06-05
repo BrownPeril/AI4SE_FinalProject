@@ -34,3 +34,26 @@ export const cafeColors = {
   warn: '#c9822f',
   danger: '#b33a3a'
 }
+
+export const cafeCssVars = `
+  --cafe-bg: #fbf6ee;
+  --cafe-surface: #fffdf8;
+  --cafe-surface-warm: #f1e3cf;
+  --cafe-accent: #9b5b32;
+  --cafe-accent-hover: #b06a3d;
+  --cafe-accent-pressed: #8a502b;
+  --cafe-fg: #201914;
+  --cafe-fg2: #4c4037;
+  --cafe-muted: #7a6d63;
+  --cafe-border: #ded2c3;
+  --cafe-border-soft: #eee4d7;
+  --cafe-success: #4f8a4f;
+  --cafe-warn: #c9822f;
+  --cafe-danger: #b33a3a;
+  --cafe-radius: 10px;
+  --cafe-radius-sm: 6px;
+  --cafe-shadow-sm: 0 1px 2px rgba(32, 25, 20, 0.06);
+  --cafe-shadow-md: 0 4px 12px rgba(32, 25, 20, 0.08);
+  --cafe-shadow-lg: 0 8px 24px rgba(32, 25, 20, 0.12);
+  --cafe-transition: 0.2s ease;
+`
