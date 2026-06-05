@@ -21,14 +21,14 @@
             </n-gi>
             <n-gi>
               <n-form-item label="价格" path="price">
-                <n-input-number v-model:value="formData.price" :min="0" :precision="2" size="large" style="width: 100%;">
+                <n-input-number v-model:value="formData.price" :min="0" :precision="2" placeholder="请输入价格" size="large" style="width: 100%;">
                   <template #prefix>¥</template>
                 </n-input-number>
               </n-form-item>
             </n-gi>
             <n-gi>
               <n-form-item label="消费时间" path="consumeDate">
-                <n-date-picker v-model:formatted-value="formData.consumeDate" type="datetime" format="yyyy-MM-dd HH:mm:ss" size="large" style="width: 100%;" />
+                <n-date-picker v-model:formatted-value="formData.consumeDate" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="请输入时间" size="large" style="width: 100%;" />
               </n-form-item>
             </n-gi>
           </n-grid>

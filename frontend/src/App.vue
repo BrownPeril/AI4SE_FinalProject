@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
+  <n-config-provider :theme-overrides="themeOverrides" :locale="zhCN" :date-locale="dateZhCN">
     <n-message-provider>
       <n-layout class="cafe-app">
         <n-layout-header bordered class="cafe-header">
@@ -23,6 +23,7 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { cafeThemeOverrides, cafeCssVars } from './assets/styles/theme.js'
+import { zhCN, dateZhCN } from 'naive-ui'
 
 const router = useRouter()
 const route = useRoute()

@@ -147,15 +147,15 @@ const chartOption = computed(() => {
         formatter: '{b}: {c}杯 ({d}%)'
       },
       legend: {
-        bottom: 0,
+        bottom: 4,
         itemGap: 16,
-                textStyle: { color: '#4c4037', fontSize: 12 },
+        textStyle: { color: '#4c4037', fontSize: 12 },
         icon: 'circle'
       },
       series: [{
         type: 'pie',
-        radius: ['45%', '70%'],
-        center: ['50%', '45%'],
+        radius: ['35%', '60%'],
+        center: ['50%', '38%'],
         data: pieData,
         color: cafeColors,
         label: {
